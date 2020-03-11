@@ -1,10 +1,14 @@
-#include "backup.h"
+#include "includes/backup.h"
 #include <fstream>
 
+//For debugging \/
+#include <iostream>
+
 void readBackups () {
-    char readByte[32];
+    std::cout << "readBackups();\n";
+    char readByte[128];
     std::fstream backups;
     backups.open("backups.txt", std::fstream::in);
-    backups.read(readByte, backups.gcount());
+        backups.getline(readByte, 64);
     backups.close();
-}
+}   

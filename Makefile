@@ -1,9 +1,22 @@
-compiler = g++
+CC = g++
 CFLAGS = -Wall
+Includes = -lstdc++
+Name = backerup
 
 default: backuper
-backuper: main.cpp backup.h backup.a
-	$(compiler) $(CFLAGS) -o backuper.exe main.cpp backup.h backup.a
+windows: backuper_windows
+win: backuper_windows
+backuper: main.cpp backup.a
+	$(CC) $(CFLAGS) -o $(Name) main.cpp backup.a $(Includes)
 
-backup.a: backup.cpp
-	ar rvs backup.a backup.cpp
+backuper_windows: main.cpp backup.h backup.a
+	$(CC) $(CFLAGS) -o $(Name).exe main.cpp backup.a $(Includes)
+
+backup.a: backup.o
+	ar rvs backup.a backup.o
+
+backup.o: backup.cpp
+	$(CC) $(CFLAGS) -c backup.cpp
+
+clean:
+	rm backup.a
