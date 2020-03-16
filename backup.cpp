@@ -11,4 +11,4 @@ void readBackups () {
     backups.open("backups.txt", std::fstream::in);
         backups.getline(readByte, 64);
     backups.close();
-}   
+}
