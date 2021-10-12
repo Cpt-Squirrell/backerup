@@ -4,23 +4,44 @@
 #include <filesystem>
 #include <cstdio>
 
-class FileManager
+//A class which will handle a vault folder
+    //Making sure the vault has all required files
+    //Retrievs files and manages the files in the vault
+class VaultManager
+{
+
+    public:
+        template <typename T>
+        void fileRetrieve(T identifier)
+        {
+            if (!std::is_same(T, std::string) || !std::is_same(T, int))
+            {
+                cout << "Invalid format." << endl;
+                return 1;
+            }
+            if (std::is_same(T, std::string))
+            {
+                //Identifier is string
+            } else
+            {
+                //Identifier is integer
+            }
+        }
+
+};
+
+//A class for reading and writing configuration files
+class ConfigManager
 {
     private:
-        char copyBuffer[32000];
-        std::streamsize copyBufferSize = 32000;
-        std::ifstream sourceFile;
-        std::ofstream targetFile;
         std::filesystem::path configFilePath = std::filesystem::path("configuration.conf");
 
+    public:
         enum confOption
         {
             vaultPath
         };
-
-    public:
-        //Todo: Make functions return success/ failure
-
+        
         void setConfig(confOption setting, std::string value)
         {
             //Check if configuration file exists
@@ -44,6 +65,21 @@ class FileManager
         {
 
         }
+};
+
+class FileManager
+{
+    private:
+        char copyBuffer[32000];
+        std::streamsize copyBufferSize = 32000;
+        std::ifstream sourceFile;
+        std::ofstream targetFile;
+        ConfigManager ConfManager = ConfigManager();
+
+    public:
+        //Todo: Make functions return success/ failure
+
+
 
         void fileBackup(std::string source, std::string target)
         {
@@ -59,29 +95,14 @@ class FileManager
             targetFile.close();
         }
 
-        template <typename T>
-        void fileRetrieve(T identifier)
-        {
-            if (!std::is_same(T, std::string) || !std::is_same(T, int))
-            {
-                cout << "Invalid format." << endl;
-                return 1;
-            }
-            if (std::is_same(T, std::string))
-            {
-                //Identifier is string
-            } else
-            {
-                //Identifier is integer
-            }
-        }
+
 
         void setBackupDestination(std::string path)
         {
             //First check if target path already has necessary folder
             if (std::filesystem::exists(path + "\\backupVault"))
             {
-                setConfig(confOption::vaultPath, path + "\\backupVault");
+                ConfManager.setConfig(ConfManager.confOption::vaultPath, path + "\\backupVault");
                 std::cout << "Vault already exists at this location.\nFile storage configuration updated.";
             }
             else
