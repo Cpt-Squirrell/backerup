@@ -9,7 +9,6 @@
     //Retrievs files and manages the files in the vault
 class VaultManager
 {
-
     public:
         template <typename T>
         void fileRetrieve(T identifier)
@@ -74,7 +73,7 @@ class FileManager
         std::streamsize copyBufferSize = 32000;
         std::ifstream sourceFile;
         std::ofstream targetFile;
-        ConfigManager ConfManager = ConfigManager();
+        ConfigManager configManager = ConfigManager();
 
     public:
         //Todo: Make functions return success/ failure
@@ -102,7 +101,7 @@ class FileManager
             //First check if target path already has necessary folder
             if (std::filesystem::exists(path + "\\backupVault"))
             {
-                ConfManager.setConfig(ConfManager.confOption::vaultPath, path + "\\backupVault");
+                configManager.setConfig(configManager.confOption::vaultPath, path + "\\backupVault");
                 std::cout << "Vault already exists at this location.\nFile storage configuration updated.";
             }
             else
@@ -116,9 +115,35 @@ class FileManager
         }
 };
 
+class InputManager
+{
+    private:
+        enum Options
+        {
+            backup
+        };
+        enum Flags
+        {
+
+        };
+        Options option;
+        Flags flags[];
+
+    public:
+        InputManager(std::string argv)
+        {
+            if (argv.find("backup") != std::string::npos)
+            {
+                option = Options::backup;
+            }
+        }
+
+};
+
 int main(int argc, char *argv[])
 {
     FileManager manager;
+    InputManager inputManager(argv[1]);
     manager.fileBackup(argv[1], argv[2]);
 
     return 0;
