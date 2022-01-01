@@ -8,10 +8,13 @@
             "name": "cl.exe - Build and debug active file",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
-            "args": [".\\Country_Roads_Original.mp3", ".\\Country_Roads_Original.backed.mp3"],
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [
+                "backup",
+                "Country_Roads_Original.mp3"
+            ],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${fileDirname}",
             "environment": [],
             "console": "externalTerminal",
             "preLaunchTask": "C/C++: cl.exe build active file"

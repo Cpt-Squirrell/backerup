@@ -3,3 +3,6 @@
 *.mp3
 *.mp4
 *.pdb
+/build
+/vault
+/.vscode
