@@ -19,20 +19,29 @@
             vaultFile->open(vaultPath.string() + "vault.xml");
             vaultFile->close();
         }
-        vaultXML->LoadFile(vaultPath.string().append("vault.xml").c_str()); //TODO: Might not work
+        vaultXML->LoadFile((vaultPath.string() + "vault.xml").c_str()); //TODO: Might not work
         rootXML = vaultXML->RootElement();
     }
         //Backup a file with path or file object
             //Returns negative if failed; else the file's ID number
     int VaultManager::fileBackup(std::filesystem::path file)
     {
+        std::filesystem::path qualifiedPath =
+            configManager->getConfig(ConfigManager::configOptions::vaultPath) +
+                file.filename().string();
+        int backupID;
+        std::error_code *copyError = new std::error_code();
         try
         {
-            std::filesystem::copy(
-                file,
-                configManager->getConfig(ConfigManager::configOptions::vaultPath) +
-                file.filename().string()
-            );
+            while(std::filesystem::exists(qualifiedPath))
+            {
+                std::cout << "Designated file already exists in registry.\n" <<
+                    " File with be backed up designated as 'copy'." << std::endl;
+                qualifiedPath = qualifiedPath.string() + ".copy" + qualifiedPath.extension().string();
+                //TODO: Does this work? lol Update: Yes it does kekw
+                //TODO: Remove these clutter comments omegalol
+            }
+            std::filesystem::copy(file, qualifiedPath);
             std::cout << "File '"
                 << file.filename().string()
                 << "' has been backed up to:\n"
@@ -40,7 +49,8 @@
                 << std::endl;
 
             //Log this backup in XML file
-            logBackup(getFirstAvailableID(), file, file.filename().string());
+            backupID = getFirstAvailableID();
+            logBackup(backupID, file, file.filename().string());
         }
         catch(const std::exception& e)
         {
@@ -48,10 +58,7 @@
             return -1;
         }
 
-        //TODO: Register backup in Vault xml
-
-
-        return 0;
+        return backupID;
     }
         //Get a file with string- or integer identifier
     void VaultManager::fileRetrieve(std::string identifier)
@@ -74,13 +81,13 @@
     void VaultManager::logBackup(int id, std::filesystem::path filePath, std::string fileName)
     {
         tinyxml2::XMLElement *newBackup = vaultXML->NewElement("file");
-        newBackup->SetAttribute("id", id);
+        newBackup->InsertNewChildElement("id")->InsertNewText(std::to_string(id).c_str());
         newBackup->InsertNewChildElement("fileName")->InsertNewText(fileName.c_str());
         newBackup->InsertNewChildElement("filePath")->InsertNewText(filePath.string().c_str());
         time_t currentTime = time(0);
         newBackup->InsertNewChildElement("fileBackupDate")->InsertNewText(ctime(&currentTime));
         rootXML->LinkEndChild(newBackup);
-        vaultXML->SaveFile("vault.xml");
+        vaultXML->SaveFile((vaultPath.string() + "vault.xml").c_str());
     }
     int VaultManager::getFirstAvailableID()
     {
@@ -94,10 +101,10 @@
             available = true;
             while(element != NULL)
             {
-                if(element->Attribute("id", (const char*)id))
+                if(element->FirstChildElement("id")->GetText() == std::to_string(id))
                 {
                     available = false;
-                    continue;
+                    break;
                 }
                 element = element->NextSiblingElement();
             }

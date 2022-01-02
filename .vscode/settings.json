@@ -63,6 +63,7 @@
         "forward_list": "cpp",
         "map": "cpp",
         "optional": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "cstdarg": "cpp"
     }
 }
