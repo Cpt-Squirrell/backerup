@@ -18,6 +18,7 @@
             std::fstream *vaultFile = new std::fstream();
             vaultFile->open(vaultPath.string() + "vault.xml");
             vaultFile->close();
+            //TODO: Populate newly created XML file with root node
         }
         vaultXML->LoadFile((vaultPath.string() + "vault.xml").c_str()); //TODO: Might not work
         rootXML = vaultXML->RootElement();
@@ -40,6 +41,7 @@
                 qualifiedPath = qualifiedPath.string() + ".copy" + qualifiedPath.extension().string();
                 //TODO: Does this work? lol Update: Yes it does kekw
                 //TODO: Remove these clutter comments omegalol
+                //TODO: Make recursive copies appear as one notice
             }
             std::filesystem::copy(file, qualifiedPath);
             std::cout << "File '"
@@ -51,6 +53,10 @@
             //Log this backup in XML file
             backupID = getFirstAvailableID();
             logBackup(backupID, file, file.filename().string());
+
+            std::cout << file.filename().string()
+                << " has been assigned ID "
+                << backupID << std::endl;
         }
         catch(const std::exception& e)
         {
@@ -60,12 +66,62 @@
 
         return backupID;
     }
+
         //Get a file with string- or integer identifier
     void VaultManager::fileRetrieve(std::string identifier)
     {
+        tinyxml2::XMLElement *file = rootXML->FirstChildElement("file");
+        while(file != NULL)
+        {
+            //Check this file's name against the provided filename
+            if (strcmp(identifier.c_str(), file->FirstChildElement("fileName")->GetText()) == 0)
+                break;
+            file = file->NextSiblingElement();
+        }
+        if (file == NULL)
+        {
+            std::cout << "We could not find " << identifier
+                << " in the vault. Use 'query' to search."
+                << std::endl;
+            return;
+        }
+        else
+        {
+            //Attempt to move the found file to where it was called from
+            std::string qualifiedPath =
+                configManager->workingDirectory() + file->FirstChildElement("fileName")->GetText();
+            if (std::filesystem::exists(qualifiedPath))
+            {
+                std::cout << "File with same name already exists.\n"
+                    << "File will be retrieved as 'backup.file'" << std::endl;
+                qualifiedPath = "backup." + qualifiedPath;
+                if (std::filesystem::exists(qualifiedPath))
+                {
+                    int iterator = 1;
+                    while(std::filesystem::exists(std::to_string(iterator) + qualifiedPath))
+                    {
+                        iterator++;
+                    }
+                    qualifiedPath = std::to_string(iterator) + qualifiedPath;
+                }
+            }
+            try
+            {
+                std::filesystem::copy(
+                    file->FirstChildElement("filePath")->GetText(),
+                    qualifiedPath
+                );
+            }
+            catch(const std::exception& e)
+            {
+                std::cerr << "Could not retrieve the file: \n";
+                std::cerr << e.what() << std::endl;
+            }
+        }
     }
     void VaultManager::fileRetrieve(int identifier)
     {
+
     }
         //Return whether a file matches specified query
             //Can return all close-matching results (optional)

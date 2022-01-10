@@ -16,8 +16,10 @@ class ConfigManager
         ~ConfigManager();
         void setConfig(configOptions option, std::string value);
         std::string getConfig(configOptions option);
+        std::string workingDirectory();
 
     private:
+        std::filesystem::path workingDirectoryPath;
         std::filesystem::path configFilePath = std::filesystem::path("configuration.xml");
         tinyxml2::XMLDocument *document;
         tinyxml2::XMLElement *rootNode;
