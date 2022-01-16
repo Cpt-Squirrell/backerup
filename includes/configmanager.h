@@ -8,21 +8,14 @@
 class ConfigManager
 {
     public:
-        enum configOptions
-        {
-            vaultPath
-        };
-        ConfigManager();
+        ConfigManager(const char *applicationPath);
         ~ConfigManager();
-        void setConfig(configOptions option, std::string value);
-        std::string getConfig(configOptions option);
-        std::string workingDirectory();
+        std::filesystem::path getVaultPath();
 
     private:
-        std::filesystem::path workingDirectoryPath;
-        std::filesystem::path configFilePath = std::filesystem::path("configuration.xml");
-        tinyxml2::XMLDocument *document;
+        std::filesystem::path vaultPath;
+        std::filesystem::path configPath;
+        tinyxml2::XMLDocument document;
         tinyxml2::XMLElement *rootNode;
-        tinyxml2::XMLElement *nodeVaultPath;
 };
 #endif // __CONFIGMANAGER_H__
