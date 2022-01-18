@@ -1,6 +1,5 @@
 #include <fstream>
 #include <iostream>
-#include <windows.h>
 #include <filesystem>
 #include "includes\tinyxml2.h"
 #include "includes\configmanager.h"

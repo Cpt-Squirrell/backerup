@@ -3,6 +3,7 @@
 *.mp3
 *.mp4
 *.pdb
+cmake-build-*
 /build
 /vault
 /.vscode

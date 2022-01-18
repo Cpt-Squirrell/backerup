@@ -24,10 +24,10 @@
     {
         return option;
     }
-    InputManager::Flags* InputManager::getFlags()
+    /*InputManager::Flags* InputManager::getFlags()
     {
         return flags;
-    }
+    }*/
     std::string InputManager::getArgument()
     {
         return argument;

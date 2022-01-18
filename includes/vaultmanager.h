@@ -3,7 +3,7 @@
 
 #include <fstream>
 #include <filesystem>
-#include "includes\configmanager.h"
+#include "configmanager.h"
 
     //A class which will handle a vault folder
         //Making sure the vault has all required files
@@ -12,9 +12,9 @@ class VaultManager
 {
     public:
         VaultManager(ConfigManager *manager);
-        int fileBackup(std::filesystem::path file);
+        int fileBackup(const std::filesystem::path& file);
             //Get a file with string- or integer identifier
-        void fileRetrieve(std::string identifier);
+        void fileRetrieve(const std::string& identifier);
         void fileRetrieve(int identifier);
             //Return whether a file matches specified query
                 //Can return all close-matching results (optional)

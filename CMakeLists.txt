@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.22.1)  # CMake version check
+cmake_minimum_required(VERSION 3.21.1)  # CMake version check
 project(Backerup)               		# Create project "Backerup"
 set(CMAKE_CXX_STANDARD 17)            	# Enable c++17 standard
 

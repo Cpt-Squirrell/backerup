@@ -13,7 +13,10 @@ class InputManager
             setConfig,
             getConfig
         };
-        enum Flags;
+        enum Flags
+		{
+
+		};
         InputManager(int argc, char *arguments[]);
         Options getOption();
         Flags* getFlags();
@@ -22,6 +25,6 @@ class InputManager
     private:
         std::string argument;
         Options option;
-        Flags flags[];
+        //Flags flags[];
 };
 #endif // __INPUTMANAGER_H__

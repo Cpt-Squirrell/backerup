@@ -1,5 +1,4 @@
 #include <ctime>
-#include <fstream>
 #include <iostream>
 #include <filesystem>
 #include "includes\tinyxml2.h"
@@ -28,7 +27,7 @@
         
         //Backup a file with path or file object
             //Returns negative if failed; else the file's ID number
-    int VaultManager::fileBackup(std::filesystem::path file)
+    int VaultManager::fileBackup(const std::filesystem::path& file)
     {
         //The path after the file is put in vault
         std::filesystem::path fileVaultPath = configManager->getVaultPath() / file;
@@ -48,13 +47,15 @@
                     if (copy == 0)
                     {
                         incrementedPath = fileVaultPath;
-                        incrementedPath.replace_filename(filenameNoExt + "_copy" + fileVaultPath.extension().string());
+                        incrementedPath.replace_filename
+							(filenameNoExt + "_copy" + fileVaultPath.extension().string());
                     }
                     else
                     {
                         incrementedPath = fileVaultPath;
                         incrementedPath.replace_filename
-                            (filenameNoExt + "_" + "copy" + std::to_string(copy) + fileVaultPath.extension().string());
+                            (filenameNoExt + "_" + "copy" + std::to_string(copy)
+								+ fileVaultPath.extension().string());
                     }
                     copy++;
                 } while (std::filesystem::exists(incrementedPath));
@@ -70,10 +71,10 @@
 
             //Log this backup in XML file
             backupID = getFirstAvailableID();
-            logBackup(backupID, std::filesystem::current_path() / file, file.filename().string(), fileVaultPath.filename().string());
+            logBackup(backupID, std::filesystem::current_path() / file,
+					  file.filename().string(), fileVaultPath.filename().string());
 
-            std::cout << "Your file has been assigned ID "
-                << backupID << std::endl;
+            std::cout << "Your file has been assigned ID " << backupID << std::endl;
         }
         catch(const std::exception& e)
         {
@@ -85,17 +86,17 @@
     }
 
         //Get a file with string- or integer identifier
-    void VaultManager::fileRetrieve(std::string identifier)
+    void VaultManager::fileRetrieve(const std::string& identifier)
     {
         tinyxml2::XMLElement *file = rootNode->FirstChildElement("file");
-        while(file != NULL)
+        while(file != nullptr)
         {
             //Check this file's name against the provided filename
             if (strcmp(identifier.c_str(), file->FirstChildElement("fileName")->GetText()) == 0)
                 break;
             file = file->NextSiblingElement();
         }
-        if (file == NULL)
+        if (file == nullptr)
         {
             std::cout << "We could not find " << identifier
                 << " in the vault. Use 'query' to search."
@@ -119,13 +120,15 @@
                     if (copy == 0)
                     {
                         incrementedPath = backupFileName;
-                        incrementedPath.replace_filename(filenameNoExt + "_copy" + backupFileName.extension().string());
+                        incrementedPath.replace_filename
+							(filenameNoExt + "_copy" + backupFileName.extension().string());
                     }
                     else
                     {
                         incrementedPath = backupFileName;
                         incrementedPath.replace_filename
-                            (filenameNoExt + "_" + "copy" + std::to_string(copy) + backupFileName.extension().string());
+                            (filenameNoExt + "_" + "copy" + std::to_string(copy)
+								+ backupFileName.extension().string());
                     }
                     copy++;
                 } while (std::filesystem::exists(incrementedPath));
@@ -143,18 +146,21 @@
     std::FILE* fileQuery(std::string query, bool similar);
         //TODO: Add code
 
-    void VaultManager::logBackup(int id, std::filesystem::path filePath, std::string fileName, std::string backupName)
+    void VaultManager::logBackup
+		(const int id, const std::filesystem::path filePath, const std::string fileName, const std::string backupName)
     {
         tinyxml2::XMLElement *newBackup = document.NewElement("file");
         newBackup->InsertNewChildElement("id")->InsertNewText(std::to_string(id).c_str());
         newBackup->InsertNewChildElement("fileName")->InsertNewText(fileName.c_str());
         newBackup->InsertNewChildElement("backupName")->InsertNewText(backupName.c_str());
         newBackup->InsertNewChildElement("filePath")->InsertNewText(filePath.string().c_str());
-        time_t currentTime = time(0);
-        std::string currentTimeString = ctime(&currentTime);
-        currentTimeString.erase(std::remove(currentTimeString.begin(), currentTimeString.end(), '\n'), currentTimeString.end()); //Remove any newlines
-        currentTimeString.erase(std::remove(currentTimeString.begin(), currentTimeString.end(), '\r'), currentTimeString.end()); //Remove any newlines
-        newBackup->InsertNewChildElement("backupDate")->InsertNewText(currentTimeString.c_str());
+        time_t currentTime = time(nullptr);
+		std::string currentTimeString = ctime(&currentTime);
+		currentTimeString.erase(std::remove(currentTimeString.begin(), currentTimeString.end(), '\n'),
+								currentTimeString.end()); //Remove any newlines
+		currentTimeString.erase(std::remove(currentTimeString.begin(), currentTimeString.end(), '\r'),
+								currentTimeString.end()); //Remove any newlines
+		newBackup->InsertNewChildElement("backupDate")->InsertNewText(currentTimeString.c_str());
         rootNode->LinkEndChild(newBackup);
         document.SaveFile(vaultPath.string().c_str());
     }
@@ -162,13 +168,13 @@
     {
         int id = 0;
         tinyxml2::XMLElement *element = rootNode->FirstChildElement("file");
-        if (element == NULL)
+        if (element == nullptr)
             return id;
         bool available = false;
         while(!available)
         {
             available = true;
-            while(element != NULL)
+            while(element != nullptr)
             {
                 if(element->FirstChildElement("id")->GetText() == std::to_string(id))
                 {
