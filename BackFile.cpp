@@ -26,4 +26,3 @@ backFile::backFile(ConfigManager *configManager, int idFile)
 	}
 
 }
-asd

@@ -13,12 +13,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b45e8f82-3b8a-439f-ae18-b87515af83b4" name="Changes" comment="Testing project using CLion IDE">
-      <change afterPath="$PROJECT_DIR$/BackFile.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/includes/backfile.h" afterDir="false" />
+    <list default="true" id="b45e8f82-3b8a-439f-ae18-b87515af83b4" name="Changes" comment="TODO New Test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VaultManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/VaultManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackFile.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/BackFile.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +113,7 @@
       <workItem from="1642535852586" duration="140000" />
       <workItem from="1642536001017" duration="30000" />
       <workItem from="1642536040316" duration="4113000" />
-      <workItem from="1642607219080" duration="9645000" />
+      <workItem from="1642607219080" duration="9794000" />
     </task>
     <task id="LOCAL-00001" summary="Testing project using CLion IDE">
       <created>1642543240942</created>
@@ -125,7 +122,21 @@
       <option name="project" value="LOCAL" />
       <updated>1642543240942</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added backFile.cpp/ .h (Wrapper for files from XML)">
+      <created>1642630715815</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1642630715815</updated>
+    </task>
+    <task id="LOCAL-00003" summary="TODO test">
+      <created>1642630735615</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1642630735615</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,7 +155,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Testing project using CLion IDE" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing project using CLion IDE" />
+    <MESSAGE value="Added backFile.cpp/ .h (Wrapper for files from XML)" />
+    <MESSAGE value="TODO test" />
+    <MESSAGE value="TODO New Test" />
+    <option name="LAST_COMMIT_MESSAGE" value="TODO New Test" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
