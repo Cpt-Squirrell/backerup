@@ -24,14 +24,12 @@
         document.LoadFile(vaultPath.string().c_str());
         rootNode = document.RootElement();
     }
-
-
-
+        
         //Backup a file with path or file object
             //Returns negative if failed; else the file's ID number
     int VaultManager::fileBackup(const std::filesystem::path& file)
     {
-        //The file path after the file is put in vault
+        //The path after the file is put in vault
         std::filesystem::path fileVaultPath = configManager->getVaultPath() / file;
         int backupID;
         try
@@ -65,7 +63,7 @@
             }
 
             std::filesystem::copy(file, fileVaultPath);
-            std::cout << "File '"
+            std::cout << "File \n\t'"
                 << file.filename().string()
                 << "'\nhas been backed up to:\n\t"
                 << configManager->getVaultPath()
@@ -86,8 +84,6 @@
 
         return backupID;
     }
-
-
 
         //Get a file with string- or integer identifier
     void VaultManager::fileRetrieve(const std::string& identifier)
@@ -143,17 +139,11 @@
                 std::filesystem::current_path() / backupFileName);
         }
     }
-
-
-
     //void VaultManager::fileRetrieve(int identifier);
         //Return whether a file matches specified query
-		//Can return all close-matching results (optional)
-    std::FILE fileQuery(std::string query)
-	{
-		
-	}
-    //std::FILE* fileQuery(std::string query, bool similar);
+            //Can return all close-matching results (optional)
+    std::FILE fileQuery(std::string query);
+    std::FILE* fileQuery(std::string query, bool similar);
         //TODO: Add code
 
     void VaultManager::logBackup
