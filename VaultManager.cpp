@@ -154,13 +154,12 @@
         newBackup->InsertNewChildElement("fileName")->InsertNewText(fileName.c_str());
         newBackup->InsertNewChildElement("backupName")->InsertNewText(backupName.c_str());
         newBackup->InsertNewChildElement("filePath")->InsertNewText(filePath.string().c_str());
-        time_t currentTime = time(nullptr);
-		std::string currentTimeString = ctime(&currentTime);
+		std::time_t time = std::time(nullptr);
+        std::string currentTimeString = ctime(&time);
 		currentTimeString.erase(std::remove(currentTimeString.begin(), currentTimeString.end(), '\n'),
-								currentTimeString.end()); //Remove any newlines
-		currentTimeString.erase(std::remove(currentTimeString.begin(), currentTimeString.end(), '\r'),
-								currentTimeString.end()); //Remove any newlines
+								currentTimeString.end()); //Remove the trailing newline character
 		newBackup->InsertNewChildElement("backupDate")->InsertNewText(currentTimeString.c_str());
+		newBackup->FirstChildElement("backupDate")->SetAttribute("time", std::time(nullptr));
         rootNode->LinkEndChild(newBackup);
         document.SaveFile(vaultPath.string().c_str());
     }

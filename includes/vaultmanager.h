@@ -4,10 +4,9 @@
 #include <fstream>
 #include <filesystem>
 #include "configmanager.h"
-
-    //A class which will handle a vault folder
-        //Making sure the vault has all required files
-        //Retrievs files and manages the files in the vault
+//A class which will handle a vault folder
+	//Making sure the vault has all required files
+	//Retrievs files and manages the files in the vault
 class VaultManager
 {
     public:

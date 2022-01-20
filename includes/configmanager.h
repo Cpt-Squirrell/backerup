@@ -4,7 +4,7 @@
 #include <string>
 #include <filesystem>
 #include "tinyxml2.h"
-    //A class for reading and writing to the configuration file
+//A class for reading and writing to the configuration file
 class ConfigManager
 {
     public:

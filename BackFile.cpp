@@ -1,6 +1,7 @@
+#include <cstdio>
 #include "includes/backfile.h"
 
-backFile::backFile(ConfigManager *configManager, int idFile)
+BackFile::BackFile(ConfigManager *configManager, int idFile)
 {
 	//Extract and populate the variables
 	tinyxml2::XMLDocument document;
@@ -22,7 +23,9 @@ backFile::backFile(ConfigManager *configManager, int idFile)
 		name = element->FirstChildElement("name")->GetText();
 		backupName = element->FirstChildElement("backupName")->GetText();
 		filePath = element->FirstChildElement("filePath")->GetText();
-		//date = ; TODO: Use sscanf() to parse string to date
+		if (element->FirstChildElement("backupDate")->IntAttribute("time"))
+			date = element->FirstChildElement("backupDate")->IntAttribute("time");
+		else //File is missing date in seconds
+			date = NULL;
 	}
-
 }
