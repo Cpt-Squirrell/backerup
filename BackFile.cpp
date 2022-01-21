@@ -1,7 +1,8 @@
 #include <cstdio>
+#include <iostream>
 #include "includes/backfile.h"
 
-BackFile::BackFile(ConfigManager *configManager, int idFile)
+BackFile::BackFile(ConfigManager *configManager, const int idFile)
 {
 	//Extract and populate the variables
 	tinyxml2::XMLDocument document;
@@ -27,5 +28,15 @@ BackFile::BackFile(ConfigManager *configManager, int idFile)
 			date = element->FirstChildElement("backupDate")->IntAttribute("time");
 		else //File is missing date in seconds
 			date = NULL;
+		location = filePath.string().erase(filePath.string().length() - filePath.filename().string().length());
+		std::cerr << location << std::endl;
 	}
+
+
 }
+
+std::string BackFile::getName() { return name; }
+std::string BackFile::getBackupName() { return backupName; }
+std::filesystem::path BackFile::getPath() { return filePath; }
+std::filesystem::path BackFile::getLocation() { return location; }
+std::time_t BackFile::getDate() { return date; }

@@ -25,7 +25,7 @@ class VaultManager
         std::filesystem::path vaultPath;
         tinyxml2::XMLDocument document;
         tinyxml2::XMLElement *rootNode;
-        void logBackup(int id, std::filesystem::path filePath, std::string fileName, std::string backupName);
+        void logBackup(int id, const std::filesystem::path& filePath, const std::string& fileName, const std::string& backupName);
         int getFirstAvailableID();
 };
 #endif // __VAULTMANAGER_H__

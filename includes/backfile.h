@@ -10,11 +10,12 @@ public:
 	std::string getName();
 	std::string getBackupName();
 	std::filesystem::path getPath();
+	std::filesystem::path getLocation();
 	std::time_t getDate();
 
 private:
 	std::string name, backupName;
-	std::filesystem::path filePath;
+	std::filesystem::path filePath, location;
 	std::time_t date;
 };
 

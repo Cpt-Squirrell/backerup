@@ -13,12 +13,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b45e8f82-3b8a-439f-ae18-b87515af83b4" name="Changes" comment="TODO New Test">
-      <change afterPath="$PROJECT_DIR$/includes/backfile.h" afterDir="false" />
+    <list default="true" id="b45e8f82-3b8a-439f-ae18-b87515af83b4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackFile.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/BackFile.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VaultManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/VaultManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/backfile.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/backfile.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/configmanager.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/configmanager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/vaultmanager.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/vaultmanager.h" afterDir="false" />
     </list>
@@ -81,17 +80,17 @@
     <property name="structure.view.defaults.are.configured" value="true" />
   </component>
   <component name="RunManager" selected="CMake Application.Debug (backup)">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Backerup" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Backerup" TARGET_NAME="Backerup" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Backerup" RUN_TARGET_NAME="Backerup">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="Debug (backup)" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="backup Country_Roads_Original.mp3" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Backerup" TARGET_NAME="Backerup" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Backerup" RUN_TARGET_NAME="Backerup">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -122,7 +121,8 @@
       <workItem from="1642536001017" duration="30000" />
       <workItem from="1642536040316" duration="4113000" />
       <workItem from="1642607219080" duration="9794000" />
-      <workItem from="1642668483029" duration="2613000" />
+      <workItem from="1642668483029" duration="2701000" />
+      <workItem from="1642699054578" duration="4965000" />
     </task>
     <task id="LOCAL-00001" summary="Testing project using CLion IDE">
       <created>1642543240942</created>
@@ -145,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642630735615</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fixed and updated backFile.cpp/ .h">
+      <created>1642671160243</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1642671160243</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,7 +174,8 @@
     <MESSAGE value="Added backFile.cpp/ .h (Wrapper for files from XML)" />
     <MESSAGE value="TODO test" />
     <MESSAGE value="TODO New Test" />
-    <option name="LAST_COMMIT_MESSAGE" value="TODO New Test" />
+    <MESSAGE value="Fixed and updated backFile.cpp/ .h" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

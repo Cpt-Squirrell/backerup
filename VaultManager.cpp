@@ -1,9 +1,10 @@
 #include <ctime>
 #include <iostream>
 #include <filesystem>
-#include "includes\tinyxml2.h"
-#include "includes\configmanager.h"
-#include "includes\vaultmanager.h"
+#include "includes/tinyxml2.h"
+#include "includes/backfile.h"
+#include "includes/configmanager.h"
+#include "includes/vaultmanager.h"
 
     VaultManager::VaultManager(ConfigManager *manager)
     {
@@ -142,12 +143,18 @@
     //void VaultManager::fileRetrieve(int identifier);
         //Return whether a file matches specified query
             //Can return all close-matching results (optional)
-    std::FILE fileQuery(std::string query);
-    std::FILE* fileQuery(std::string query, bool similar);
-        //TODO: Add code
+    std::FILE fileQuery(std::string query)
+	{
+
+	}
+
+	BackFile[] getFiles()
+	{
+
+	}
 
     void VaultManager::logBackup
-		(const int id, const std::filesystem::path filePath, const std::string fileName, const std::string backupName)
+		(const int id, const std::filesystem::path& filePath, const std::string& fileName, const std::string& backupName)
     {
         tinyxml2::XMLElement *newBackup = document.NewElement("file");
         newBackup->InsertNewChildElement("id")->InsertNewText(std::to_string(id).c_str());

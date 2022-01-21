@@ -8,7 +8,7 @@
 class ConfigManager
 {
     public:
-        ConfigManager(const char *applicationPath);
+        explicit ConfigManager(const char *applicationPath);
         ~ConfigManager();
         std::filesystem::path getVaultPath();
 
