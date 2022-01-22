@@ -5,6 +5,8 @@
 BackFile::BackFile(ConfigManager *configManager, const int idFile)
 {
 	//Extract and populate the variables
+	if (configManager == nullptr)
+		return; //TODO: Might be dangerous behaviour
 	tinyxml2::XMLDocument document;
 	document.LoadFile((configManager->getVaultPath().string() + "vault.xml").c_str());
 	if (!document.RootElement()->FirstChildElement("file"))
@@ -21,7 +23,7 @@ BackFile::BackFile(ConfigManager *configManager, const int idFile)
 
 	if (element != std::nullptr_t())
 	{
-		name = element->FirstChildElement("name")->GetText();
+		name = element->FirstChildElement("fileName")->GetText();
 		backupName = element->FirstChildElement("backupName")->GetText();
 		filePath = element->FirstChildElement("filePath")->GetText();
 		if (element->FirstChildElement("backupDate")->IntAttribute("time"))

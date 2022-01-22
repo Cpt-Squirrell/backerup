@@ -11,12 +11,14 @@
             option = Options::backup;
         else if (!optionString.compare("retrieve"))
             option = Options::retrieve;
+		else if (!optionString.compare("query"))
+			option = Options::query;
         else if (!optionString.compare("setConfig"))
             option = Options::setConfig;
         else if (!optionString.compare("getConfig"))
             option = Options::getConfig;
 
-        if (option == Options::backup || option == Options::retrieve)
+        if (option == Options::backup || option == Options::retrieve || option == Options::query)
             argument = arguments[argc - 1]; //TODO: Might be argc (not - 1)
     }
 

@@ -10,6 +10,7 @@ class InputManager
         {
             backup,
             retrieve,
+			query,
             setConfig,
             getConfig
         };

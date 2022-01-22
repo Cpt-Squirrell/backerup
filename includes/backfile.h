@@ -6,7 +6,7 @@
 class BackFile
 {
 public:
-	BackFile(ConfigManager *configManager, int idFile);
+	BackFile(ConfigManager *configManager = nullptr, int idFile = 0);
 	std::string getName();
 	std::string getBackupName();
 	std::filesystem::path getPath();

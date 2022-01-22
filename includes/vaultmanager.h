@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <filesystem>
+#include "backfile.h"
 #include "configmanager.h"
 //A class which will handle a vault folder
 	//Making sure the vault has all required files
@@ -17,8 +18,9 @@ class VaultManager
         void fileRetrieve(int identifier);
             //Return whether a file matches specified query
                 //Can return all close-matching results (optional)
-        std::FILE fileQuery(std::string query);
-        std::FILE* fileQuery(std::string query, bool similar);
+        BackFile* fileQuery(const std::string& query);
+
+		std::vector<BackFile*> getFiles();
 
     private:
         ConfigManager *configManager;

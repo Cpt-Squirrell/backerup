@@ -143,14 +143,43 @@
     //void VaultManager::fileRetrieve(int identifier);
         //Return whether a file matches specified query
             //Can return all close-matching results (optional)
-    std::FILE fileQuery(std::string query)
+    BackFile* VaultManager::fileQuery(const std::string& query)
 	{
+		std::vector<BackFile*> files = getFiles(), result;
+		int bestMatchInt = 0;
+		for (auto & file : files)
+		{
+			std::string name = file->getName();
+			int matchingChars = 0;
+			for (int i = 0; i < file->getName().size(); i++)
+			{
+				if (name.c_str()[i] == query.c_str()[i])
+					matchingChars++;
+			}
+			if (matchingChars > bestMatchInt)
+			{
+				bestMatchInt = matchingChars;
+				result.push_back(file);
+			}
+		}
+		std::cout << "Best match found: " << result[result.size() - 1]->getName() << ",\n"
+				<< "backed up as: " << result[result.size() - 1]->getBackupName() << '.' << std::endl;
 
+		return result[result.size() - 1];
 	}
 
-	BackFile[] getFiles()
+	std::vector<BackFile*> VaultManager::getFiles()
 	{
-
+		if (!document.RootElement()->FirstChildElement("file"))
+			return std::vector<BackFile*>();
+		tinyxml2::XMLElement *element = document.RootElement()->FirstChildElement("file");
+		std::vector<BackFile*> returnVector;
+		do
+		{
+			returnVector.push_back(new BackFile(configManager, std::stoi(element->FirstChildElement("id")->GetText())));
+			element = element->NextSiblingElement();
+		} while (element != nullptr);
+		return returnVector;
 	}
 
     void VaultManager::logBackup
