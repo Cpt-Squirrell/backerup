@@ -3,29 +3,34 @@
 
 #include <string>
 #include <filesystem>
-class InputManager
-{
-    public:
-        enum Options
-        {
-            backup,
-            retrieve,
-			query,
-            setConfig,
-            getConfig
-        };
-        enum Flags
-		{
 
-		};
-        InputManager(int argc, char *arguments[]);
-        Options getOption();
-        Flags* getFlags();
-        std::string getArgument();
-    
-    private:
-        std::string argument;
-        Options option;
-        //Flags flags[];
+class InputManager {
+public:
+	enum Options {
+		backup,
+		retrieve,
+		restore,
+		query,
+		list,
+		setConfig,
+		getConfig,
+		help
+	};
+	enum Flags {
+
+	};
+
+	InputManager(int argc, char *arguments[]);
+
+	Options getOption();
+
+	//Flags* getFlags();
+	std::string getArgument();
+
+private:
+	std::string argument;
+	Options option;
+	//Flags flags[];
 };
+
 #endif // __INPUTMANAGER_H__

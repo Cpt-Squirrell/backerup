@@ -1,36 +1,42 @@
 #include <string>
 #include <iostream>
 #include <filesystem>
-#include "includes\inputmanager.h"
+#include "includes/inputmanager.h"
 
-    InputManager::InputManager(int argc, char *arguments[])
-    {
-        //Find the option
-        std::string optionString = arguments[1];
-        if (!optionString.compare("backup"))
-            option = Options::backup;
-        else if (!optionString.compare("retrieve"))
-            option = Options::retrieve;
-		else if (!optionString.compare("query"))
-			option = Options::query;
-        else if (!optionString.compare("setConfig"))
-            option = Options::setConfig;
-        else if (!optionString.compare("getConfig"))
-            option = Options::getConfig;
+InputManager::InputManager(int argc, char *arguments[]) {
+	//Find the option
+	std::string a = arguments[1];
+	if (a == "backup")
+		option = Options::backup;
+	else if (a == "retrieve")
+		option = Options::retrieve;
+	else if (a == "restore")
+		option = Options::restore;
+	else if (a == "query")
+		option = Options::query;
+	else if (a == "list")
+		option = Options::list;
+	else if (a == "get")
+		option = Options::getConfig;
+	else if (a == "set")
+		option = Options::setConfig;
 
-        if (option == Options::backup || option == Options::retrieve || option == Options::query)
-            argument = arguments[argc - 1]; //TODO: Might be argc (not - 1)
-    }
+	if (option == Options::backup ||
+		option == Options::retrieve ||
+		option == Options::restore ||
+		option == Options::query ||
+		option == Options::list)
+		argument = arguments[argc - 1]; //TODO: Might be argc (not - 1)
+}
 
-    InputManager::Options InputManager::getOption()
-    {
-        return option;
-    }
-    /*InputManager::Flags* InputManager::getFlags()
-    {
-        return flags;
-    }*/
-    std::string InputManager::getArgument()
-    {
-        return argument;
-    }
+InputManager::Options InputManager::getOption() {
+	return option;
+}
+
+/*InputManager::Flags* InputManager::getFlags()
+{
+	return flags;
+}*/
+std::string InputManager::getArgument() {
+	return argument;
+}

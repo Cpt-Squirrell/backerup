@@ -1,8 +1,8 @@
 #include <fstream>
 #include <iostream>
 #include <filesystem>
-#include "includes\tinyxml2.h"
-#include "includes\configmanager.h"
+#include "includes/tinyxml2.h"
+#include "includes/configmanager.h"
 
     ConfigManager::ConfigManager(const char *applicationPath)
     {
