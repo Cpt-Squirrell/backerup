@@ -13,13 +13,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b45e8f82-3b8a-439f-ae18-b87515af83b4" name="Changes" comment="Almost done with BackFile.cpp">
+    <list default="true" id="b45e8f82-3b8a-439f-ae18-b87515af83b4" name="Changes" comment="Basic Query works">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackFile.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/BackFile.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InputManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/InputManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VaultManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/VaultManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backerup.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/backerup.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/backfile.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/backfile.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/inputmanager.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/inputmanager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/vaultmanager.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/vaultmanager.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -126,7 +125,7 @@
       <workItem from="1642668483029" duration="2701000" />
       <workItem from="1642699054578" duration="5754000" />
       <workItem from="1642773570583" duration="7177000" />
-      <workItem from="1642847184877" duration="9579000" />
+      <workItem from="1642847184877" duration="16063000" />
     </task>
     <task id="LOCAL-00001" summary="Testing project using CLion IDE">
       <created>1642543240942</created>
@@ -163,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642753568681</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Basic Query works">
+      <created>1642860052420</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1642860052420</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,12 +193,14 @@
     <MESSAGE value="TODO New Test" />
     <MESSAGE value="Fixed and updated backFile.cpp/ .h" />
     <MESSAGE value="Almost done with BacFile.cpp" />
-    <option name="LAST_COMMIT_MESSAGE" value="Almost done with BacFile.cpp" />
+    <MESSAGE value="Basic Query works" />
+    <option name="LAST_COMMIT_MESSAGE" value="Basic Query works" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
         <watch expression="element-&gt;_value" language="ObjectiveC" />
+        <watch expression="duplicates[3]" />
       </configuration>
     </watches-manager>
   </component>

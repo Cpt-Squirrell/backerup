@@ -27,7 +27,7 @@ BackFile::BackFile(ConfigManager *configManager, const int idFile)
 		backupName = element->FirstChildElement("backupName")->GetText();
 		filePath = element->FirstChildElement("filePath")->GetText();
 		if (element->FirstChildElement("backupDate")->IntAttribute("time"))
-			date = element->FirstChildElement("backupDate")->IntAttribute("time");
+			date = new std::time_t(element->FirstChildElement("backupDate")->IntAttribute("time"));
 		else //File is missing date in seconds
 			date = NULL;
 		location = filePath.string().erase(filePath.string().length() - filePath.filename().string().length());
@@ -41,4 +41,4 @@ std::string BackFile::getName() { return name; }
 std::string BackFile::getBackupName() { return backupName; }
 std::filesystem::path BackFile::getPath() { return filePath; }
 std::filesystem::path BackFile::getLocation() { return location; }
-std::time_t BackFile::getDate() { return date; }
+std::time_t *BackFile::getDate() { return date; }

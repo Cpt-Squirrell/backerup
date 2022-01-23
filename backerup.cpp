@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     {
         case InputManager::Options::backup: vaultManager->fileBackup(inputManager->getArgument()); break;
         case InputManager::Options::retrieve: vaultManager->fileRetrieve(inputManager->getArgument()); break;
+		case InputManager::Options::query: vaultManager->fileQuery(inputManager->getArgument()); break;
         default: std::cout << "There was an error. Option matched no available option." << std::endl; break;
     }
 

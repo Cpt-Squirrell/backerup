@@ -143,11 +143,11 @@
     //void VaultManager::fileRetrieve(int identifier);
         //Return whether a file matches specified query
             //Can return all close-matching results (optional)
-    BackFile* VaultManager::fileQuery(const std::string& query)
+    BackFile* VaultManager::fileQuery(const std::string& query, bool verbose)
 	{
-		std::vector<BackFile*> files = getFiles(), result;
+		std::vector<BackFile*> files = getFiles(), result, duplicates;
 		int bestMatchInt = 0;
-		for (auto & file : files)
+		for (BackFile* file : files)
 		{
 			std::string name = file->getName();
 			int matchingChars = 0;
@@ -162,8 +162,41 @@
 				result.push_back(file);
 			}
 		}
-		std::cout << "Best match found: " << result[result.size() - 1]->getName() << ",\n"
-				<< "backed up as: " << result[result.size() - 1]->getBackupName() << '.' << std::endl;
+
+
+		if (verbose) //Only output text if it's what the user wants
+		{
+			BackFile* matchingFile = result[result.size() - 1];
+			std::cout << "Best match found: " << matchingFile->getName() << ",\n"
+					  << "backed up as: " << matchingFile->getBackupName() << '.' << std::endl;
+			for (BackFile* file : files)
+			{
+				if (file->getName() == matchingFile->getName())
+					duplicates.push_back(file);
+			}
+
+			if (!duplicates.empty()) //TODO: Does not list all duplicates
+			{
+				std::cout << "Duplicates were found: \n";
+				for (BackFile* file : duplicates)
+				{
+					std::cout << file->getBackupName() << "\n\t"
+							  << std::ctime((const time_t*) file->getDate());
+				}
+				std::cout << std::endl;
+			}
+
+			if (files.size() > 1) //TODO: Untested feature
+			{
+				std::cout << "Similarly found files: \n";
+				for (int i = files.size() - 1; i > files.size() - 6; i--)
+				{
+					std::cout << files[i]->getName() << '\n';
+				}
+				std::cout << std::endl;
+			}
+		}
+
 
 		return result[result.size() - 1];
 	}
@@ -171,7 +204,7 @@
 	std::vector<BackFile*> VaultManager::getFiles()
 	{
 		if (!document.RootElement()->FirstChildElement("file"))
-			return std::vector<BackFile*>();
+			return {};
 		tinyxml2::XMLElement *element = document.RootElement()->FirstChildElement("file");
 		std::vector<BackFile*> returnVector;
 		do

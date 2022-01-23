@@ -18,7 +18,7 @@ class VaultManager
         void fileRetrieve(int identifier);
             //Return whether a file matches specified query
                 //Can return all close-matching results (optional)
-        BackFile* fileQuery(const std::string& query);
+        BackFile* fileQuery(const std::string& query, bool verbose = true);
 
 		std::vector<BackFile*> getFiles();
 
