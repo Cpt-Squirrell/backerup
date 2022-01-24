@@ -8,49 +8,66 @@
 #include "includes/configmanager.h"
 #include "includes/vaultmanager.h"
 
-VaultManager::VaultManager(ConfigManager *manager) {
+VaultManager::VaultManager(ConfigManager *manager)
+{
 	configManager = manager;
-	vaultPath = configManager->getVaultPath().string() + "vault.xml";
+	vaultPath = configManager->getVaultPath() / "vault.xml";
 
-	//If XML file does not exist: create a new file
-	if (!std::filesystem::exists(configManager->getVaultPath()))
+	//Do some checks to make sure things exists
+	if (!std::filesystem::exists(configManager->getVaultPath())) //Does the vault folder exist?
+	{
+		//Create the folder
+		std::cout << "Note: Did not find configured Vault folder. Creating new." << std::endl;
 		std::filesystem::create_directory(configManager->getVaultPath());
-	if (!std::filesystem::exists(vaultPath)) {
-		//Create the new XML file
-		std::cout << "Could not find XML file inside Vault.\nCreating new." << std::endl;
+	}
+	if (!std::filesystem::exists(vaultPath)) //Does the XML exist?
+	{
+		//Create a new XML file
+		std::cout << "Note: Could not find XML file inside Vault. Creating new." << std::endl;
 		std::fstream vaultFile(vaultPath, std::ios_base::out);
-		vaultFile.write("<vault>\n</vault>", 17);
+		vaultFile.write("<vault>\n</vault>", 17); //Create the root node manually
 		vaultFile.close();
 	}
+
 	document.LoadFile(vaultPath.string().c_str());
 	rootNode = document.RootElement();
+	files = getFiles();
+}
+VaultManager::~VaultManager() {
+	document.SaveFile(vaultPath.string().c_str());
+	for (BackFile* file : files) {
+		delete file;
+		//Does this work (altering vector inside loop)
+	}
 }
 
 //Backup a file with path or file object
 //Returns negative if failed; else the file's ID number
-int VaultManager::fileBackup(const std::filesystem::path &file) {
+int VaultManager::fileBackup(const std::filesystem::path &file)
+{
 	//The path after the file is put in vault
 	std::filesystem::path fileVaultPath = createUniquePath(vaultPath, file);
-	try {
-		std::filesystem::copy(file, fileVaultPath);
-		std::cout << "File \n\t'"
-				  << file.filename().string()
-				  << "'\nhas been backed up to:\n\t"
-				  << configManager->getVaultPath()
-				  << std::endl;
+	std::filesystem::copy(file, fileVaultPath);
 
-		//Log this backup in XML file
-		int backupID = firstAvailableID();
-		logBackup(backupID, std::filesystem::current_path() / file,
-				  file.filename().string(), fileVaultPath.filename().string());
+	//Add a new entry in the vault XML file
+	int backupID = firstAvailableID();
+	logBackup(backupID, std::filesystem::current_path() / file,
+	          file.filename().string(), fileVaultPath.filename().string());
 
-		std::cout << "Your file has been assigned ID " << backupID << std::endl;
-		return backupID;
+	//Print the result
+	if (file.filename().string().length() > 50) {
+		//Filename too long, newline
+		std::cout << file.filename().string() << "\n ";
+	} else {
+		//Filename not too long, keep same line
+		std::cout << file.filename().string() << ' ';
 	}
-	catch (const std::exception &e) {
-		std::cerr << e.what() << '\n';
-		return -1;
-	}
+	std::cout << "has been backed up to:\n"
+			  << configManager->getVaultPath()
+			  << std::endl;
+
+	std::cout << "Your file has been assigned ID " << backupID << std::endl;
+	return backupID;
 }
 
 //Get a file with string- or integer identifier
@@ -111,8 +128,8 @@ void VaultManager::fileRestore(const std::string &identifier, bool replace)
 
 //Return whether a file matches specified query
 //Can return all close-matching results (optional)
-BackFile *VaultManager::fileQuery(const std::string &query, bool verbose) {
-	std::vector<BackFile *> files = getFiles(), result, duplicates;
+BackFile* VaultManager::fileQuery(const std::string &query, bool verbose) {
+	std::vector<BackFile *> result, duplicates;
 	int bestMatchInt = 0;
 	for (BackFile *file: files) {
 		std::string name = file->getName();
@@ -163,7 +180,6 @@ BackFile *VaultManager::fileQuery(const std::string &query, bool verbose) {
 }
 
 void VaultManager::listFiles() {
-	std::vector<BackFile *> files = vaultList();
 	for (BackFile *file: files) {
 		if (file->getName() == file->getBackupName())
 			std::cout << file->getName() << "\n\t"
@@ -187,26 +203,18 @@ std::vector<BackFile *> VaultManager::getFiles() {
 	return returnVector;
 }
 
-std::vector<BackFile *> VaultManager::vaultList() {
-	tinyxml2::XMLElement *element = document.RootElement()->FirstChildElement("file");
-	if (element == nullptr)
-		return {};
-	std::vector<BackFile *> returnVector;
-	int increment = 0;
-	do {
-		returnVector.push_back(new BackFile(configManager, increment));
-		increment++;
-		element = element->NextSiblingElement();
-	} while (element != nullptr);
-	return returnVector;
-}
-
-BackFile* VaultManager::parseFile(const std::string &identifier)
-{
-	std::vector<BackFile*> files = getFiles();
+BackFile* VaultManager::parseFile(const std::string &identifier) {
 	for (BackFile *file : files)
 	{
 		if (identifier == file->getName())
+			return file;
+	}
+	return nullptr;
+}
+BackFile* VaultManager::parseFile(const int identifier) {
+	for (BackFile *file : files)
+	{
+		if (identifier == file->getID())
 			return file;
 	}
 	return nullptr;
@@ -248,24 +256,9 @@ void VaultManager::logBackup
 	document.SaveFile(vaultPath.string().c_str());
 }
 
+//Find the first ID in XML which is not in use
 int VaultManager::firstAvailableID() {
 	int id = 0;
-	tinyxml2::XMLElement *element = rootNode->FirstChildElement("file");
-	if (element == nullptr)
-		return id;
-	bool available = false;
-	while (!available) {
-		available = true;
-		while (element != nullptr) {
-			if (element->FirstChildElement("id")->GetText() == std::to_string(id)) {
-				available = false;
-				break;
-			}
-			element = element->NextSiblingElement();
-		}
-		if (!available)
-			id++;
-	}
-
+	for(; parseFile(id) != nullptr; id++); //Look for any file with this ID
 	return id;
 }

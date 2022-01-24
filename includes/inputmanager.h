@@ -14,7 +14,8 @@ public:
 		list,
 		setConfig,
 		getConfig,
-		help
+		help,
+		none
 	};
 	enum Flags {
 

@@ -11,6 +11,9 @@ void help() {
 			  << "\t\tWill place the given file into the vault.\n"
 			  << "\tretrieve (file)\n"
 			  << "\t\tWill attempt to get given file. \n\t\tName must be exact. See query or list for exact name.\n"
+			  << "\trestore (file)\n"
+			  << "\t\tWill attempt to place the file back to where it was backed up from.\n"
+			  << "\t\tName must be exact, see query or list for exact names.\n"
 			  << "\tquery (name)\n"
 			  << "\t\tWill do a quick search for files with given name.\n"
 			  << "\tlist\n"
@@ -50,6 +53,10 @@ int main(int argc, char *argv[]) {
 			break;
 	}
 
+	//Clean up
+	delete inputManager;
+	delete configManager;
+	delete vaultManager;
 
 	return 0;
 }

@@ -9,39 +9,40 @@
 
 //A class which will handle a vault folder
 //Making sure the vault has all required files
-//Retrievs files and manages the files in the vault
+//Retrieves files and manages the files in the vault
 class VaultManager {
 public:
 	explicit VaultManager(ConfigManager *manager);
+	~VaultManager();
 
+	//Put &file into vault, taken from the application pwd
 	int fileBackup(const std::filesystem::path &file);
-
-	//Get a file with string- or integer identifier
+	//Place &identifier where the application was called from
 	void fileRetrieve(const std::string &identifier);
+	//Place a file back to where it was originally backed from
 	void fileRestore(const std::string &identifier, bool replace = false);
-	//Return whether a file matches specified query
-	//Can return all close-matching results (optional)
+	//Will return the closest matching file and with verbose prints it + duplicates + similar
 	BackFile *fileQuery(const std::string &query, bool verbose = true);
-
+	//Print all files in the vault
 	void listFiles();
 
-	std::vector<BackFile *> getFiles();
-
-	std::vector<BackFile *> vaultList();
-
 private:
+	//Variables
 	ConfigManager *configManager;
 	std::filesystem::path vaultPath;
 	tinyxml2::XMLDocument document;
 	tinyxml2::XMLElement *rootNode;
+	std::vector<BackFile*> files;
 
-	BackFile* parseFile(const std::string &identifier);
-	std::filesystem::path createUniquePath(std::filesystem::path destination, const std::filesystem::path& source);
-
-	void logBackup
+	//Functions
+	std::vector<BackFile *> getFiles(); //Return vector of all files in vault
+	BackFile* parseFile(const std::string &identifier); //Return the file which exactly equals &identifier
+	BackFile* parseFile(int identifier); //Return the file which exactly equals &identifier
+	static std::filesystem::path createUniquePath
+		(std::filesystem::path destination, const std::filesystem::path& source);
+	void logBackup //Create an entry in vault XML
 		(int id, const std::filesystem::path &filePath, const std::string &fileName, const std::string &backupName);
-
-	int firstAvailableID();
+	int firstAvailableID(); //Return the first ID which is unused in vault XML
 };
 
 #endif // __VAULTMANAGER_H__

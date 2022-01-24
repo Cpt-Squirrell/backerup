@@ -6,14 +6,17 @@
 class BackFile
 {
 public:
-	BackFile(ConfigManager *configManager = nullptr, int idFile = 0);
+	explicit BackFile(ConfigManager *configManager = nullptr, int idFile = 0);
+	~BackFile();
+	int getID();
 	std::string getName();
 	std::string getBackupName();
 	std::filesystem::path getPath();
 	std::filesystem::path getLocation();
-	std::time_t *getDate();
+	std::time_t* getDate();
 
 private:
+	int id;
 	std::string name, backupName;
 	std::filesystem::path filePath, location;
 	std::time_t *date;

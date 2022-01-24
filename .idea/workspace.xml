@@ -14,14 +14,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b45e8f82-3b8a-439f-ae18-b87515af83b4" name="Changes" comment="Basic Query works">
+    <list default="true" id="b45e8f82-3b8a-439f-ae18-b87515af83b4" name="Changes" comment="Fleshed out missing features (restore, query, help)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackFile.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/BackFile.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ConfigManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ConfigManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InputManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/InputManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VaultManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/VaultManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backerup.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/backerup.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/backfile.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/backfile.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/inputmanager.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/inputmanager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/vaultmanager.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/vaultmanager.h" afterDir="false" />
     </list>
@@ -48,6 +48,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_HOME_DIR$/bin/mingw/x86_64-w64-mingw32/include/stdio.h" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/includes/configmanager.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/includes/tinyxml2.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/includes/inputmanager.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/includes/vaultmanager.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CMakeLists.txt" root0="FORCE_HIGHLIGHTING" />
@@ -79,7 +80,6 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
@@ -90,7 +90,7 @@
     <property name="settings.editor.splitter.proportion" value="0.23198353" />
     <property name="structure.view.defaults.are.configured" value="true" />
   </component>
-  <component name="RunManager" selected="CMake Application.Debug (backup)">
+  <component name="RunManager" selected="CMake Application.Debug (help)">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
@@ -166,7 +166,9 @@
       <workItem from="1642699054578" duration="5754000" />
       <workItem from="1642773570583" duration="7177000" />
       <workItem from="1642847184877" duration="16063000" />
-      <workItem from="1642941587958" duration="16347000" />
+      <workItem from="1642941587958" duration="16420000" />
+      <workItem from="1643040980447" duration="3000" />
+      <workItem from="1643051736510" duration="8297000" />
     </task>
     <task id="LOCAL-00001" summary="Testing project using CLion IDE">
       <created>1642543240942</created>
@@ -210,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642860052420</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fleshed out missing features (restore, query, help)">
+      <created>1642979185078</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1642979185078</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -235,7 +244,8 @@
     <MESSAGE value="Fixed and updated backFile.cpp/ .h" />
     <MESSAGE value="Almost done with BacFile.cpp" />
     <MESSAGE value="Basic Query works" />
-    <option name="LAST_COMMIT_MESSAGE" value="Basic Query works" />
+    <MESSAGE value="Fleshed out missing features (restore, query, help)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fleshed out missing features (restore, query, help)" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
