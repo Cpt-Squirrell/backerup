@@ -65,5 +65,6 @@
         "optional": "cpp",
         "xtree": "cpp",
         "cstdarg": "cpp"
-    }
+    },
+    "cmake.configureOnOpen": true
 }

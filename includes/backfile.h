@@ -8,12 +8,12 @@ class BackFile
 public:
 	explicit BackFile(ConfigManager *configManager = nullptr, int idFile = 0);
 	~BackFile();
-	int getID();
-	std::string getName();
-	std::string getBackupName();
-	std::filesystem::path getPath();
-	std::filesystem::path getLocation();
-	std::time_t* getDate();
+	[[nodiscard]] int getID() const;
+    [[nodiscard]] std::string getName() const;
+    [[nodiscard]] std::string getBackupName() const;
+    [[nodiscard]] std::filesystem::path getPath() const;
+    [[nodiscard]] std::filesystem::path getLocation() const;
+    [[nodiscard]] std::time_t* getDate() const;
 
 private:
 	int id;

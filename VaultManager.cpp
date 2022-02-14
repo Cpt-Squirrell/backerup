@@ -37,14 +37,14 @@ VaultManager::~VaultManager() {
 	document.SaveFile(vaultPath.string().c_str());
 	for (BackFile* file : files) {
 		delete file;
-		//Does this work (altering vector inside loop)
+		//TODO: Does this work (altering vector inside loop)
+        //Seems to work
 	}
 }
 
 //Backup a file with path or file object
 //Returns negative if failed; else the file's ID number
-int VaultManager::fileBackup(const std::filesystem::path &file)
-{
+int VaultManager::fileBackup(const std::filesystem::path &file) {
 	//The path after the file is put in vault
 	std::filesystem::path fileVaultPath = createUniquePath(vaultPath, file);
 	std::filesystem::copy(file, fileVaultPath);
@@ -81,7 +81,8 @@ void VaultManager::fileRetrieve(const std::string &identifier) {
 	}
 	if (file == nullptr) {
 		std::cout << "We could not find " << identifier
-				  << " in the vault. Use 'query' to search."
+				  << " in the vault.\n"
+                  << "Use 'query' to search."
 				  << std::endl;
 		return;
 	} else {
@@ -129,6 +130,15 @@ void VaultManager::fileRestore(const std::string &identifier, bool replace)
 //Return whether a file matches specified query
 //Can return all close-matching results (optional)
 BackFile* VaultManager::fileQuery(const std::string &query, bool verbose) {
+    //Make sure there are files logged
+    if (getFiles().empty()) {
+        if (verbose) {
+            std::cout << "There are no backed up files logged in XML." << std::endl;
+            return nullptr;
+        } else
+            return nullptr;
+    }
+
 	std::vector<BackFile *> result, duplicates;
 	int bestMatchInt = 0;
 	for (BackFile *file: files) {
@@ -143,7 +153,6 @@ BackFile* VaultManager::fileQuery(const std::string &query, bool verbose) {
 			result.push_back(file);
 		}
 	}
-
 
 	if (verbose) //Only output text if it's what the user wants
 	{
@@ -175,7 +184,6 @@ BackFile* VaultManager::fileQuery(const std::string &query, bool verbose) {
 		}
 	}
 
-
 	return result[result.size() - 1];
 }
 
@@ -191,6 +199,7 @@ void VaultManager::listFiles() {
 	}
 }
 
+//Returns a vector of all files in XML
 std::vector<BackFile *> VaultManager::getFiles() {
 	if (!document.RootElement()->FirstChildElement("file"))
 		return {};

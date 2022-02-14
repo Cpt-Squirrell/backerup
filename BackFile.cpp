@@ -40,9 +40,9 @@ BackFile::BackFile(ConfigManager *configManager, const int idFile)
 
 BackFile::~BackFile() { delete date; }
 
-int BackFile::getID() { return id; }
-std::string BackFile::getName() { return name; }
-std::string BackFile::getBackupName() { return backupName; }
-std::filesystem::path BackFile::getPath() { return filePath; }
-std::filesystem::path BackFile::getLocation() { return location; }
-std::time_t *BackFile::getDate() { return date; }
+int BackFile::getID()                           const { return id; }
+std::string BackFile::getName()                 const { return name; }
+std::string BackFile::getBackupName()           const { return backupName; }
+std::filesystem::path BackFile::getPath()       const { return filePath; }
+std::filesystem::path BackFile::getLocation()   const { return location; }
+std::time_t *BackFile::getDate()                const { return date; }
