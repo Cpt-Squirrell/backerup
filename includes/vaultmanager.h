@@ -35,10 +35,10 @@ private:
 	std::vector<BackFile*> files;
 
 	//Functions
-	std::vector<BackFile *> getFiles(); //Return vector of all files in vault
+	std::vector<BackFile *> getFiles(); //Return an up-to-date vector of all files in vault
 	BackFile* parseFile(const std::string &identifier); //Return the file which exactly equals &identifier
 	BackFile* parseFile(int identifier); //Return the file which exactly equals &identifier
-	static std::filesystem::path createUniquePath
+	static std::filesystem::path createUniquePath //Appends incremental "copy"-ies until file path is valid
 		(std::filesystem::path destination, const std::filesystem::path& source);
 	void logBackup //Create an entry in vault XML
 		(int id, const std::filesystem::path &filePath, const std::string &fileName, const std::string &backupName);

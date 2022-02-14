@@ -12,13 +12,12 @@ public:
     [[nodiscard]] std::string getName() const;
     [[nodiscard]] std::string getBackupName() const;
     [[nodiscard]] std::filesystem::path getPath() const;
-    [[nodiscard]] std::filesystem::path getLocation() const;
     [[nodiscard]] std::time_t* getDate() const;
 
 private:
 	int id;
 	std::string name, backupName;
-	std::filesystem::path filePath, location;
+	std::filesystem::path filePath;
 	std::time_t *date;
 };
 

@@ -15,11 +15,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b45e8f82-3b8a-439f-ae18-b87515af83b4" name="Changes" comment="Fleshed out missing features (restore, query, help)">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackFile.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/BackFile.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VaultManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/VaultManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/tiny/tinyxml2.lib" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/backfile.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/backfile.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/vaultmanager.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/vaultmanager.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +31,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release-Visual Studio" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -72,6 +74,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -87,7 +90,7 @@
     <property name="settings.editor.splitter.proportion" value="0.23198353" />
     <property name="structure.view.defaults.are.configured" value="true" />
   </component>
-  <component name="RunManager" selected="CMake Application.Debug (query)">
+  <component name="RunManager" selected="CMake Application.Debug (restore)">
     <configuration name="Backerup" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Backerup" TARGET_NAME="Backerup" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Backerup" RUN_TARGET_NAME="Backerup">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -98,7 +101,7 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Debug (backup)" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="backup Country_Roads_Original.mp3" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Backerup" TARGET_NAME="Backerup" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Backerup" RUN_TARGET_NAME="Backerup">
+    <configuration name="Debug (backup)" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="backup bible" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Backerup" TARGET_NAME="Backerup" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Backerup" RUN_TARGET_NAME="Backerup">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -118,7 +121,12 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Debug (restore)" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="restore Country_Roads_Original.mp3" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Backerup" TARGET_NAME="Backerup" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Backerup" RUN_TARGET_NAME="Backerup">
+    <configuration name="Debug (restore)" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="restore bible" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Backerup" TARGET_NAME="Backerup" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Backerup" RUN_TARGET_NAME="Backerup">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Debug (retrieve)" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="retrieve bible" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Backerup" TARGET_NAME="Backerup" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Backerup" RUN_TARGET_NAME="Backerup">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -133,6 +141,7 @@
       <item itemvalue="CMake Application.Debug (backup)" />
       <item itemvalue="CMake Application.Debug (backup other)" />
       <item itemvalue="CMake Application.Debug (restore)" />
+      <item itemvalue="CMake Application.Debug (retrieve)" />
       <item itemvalue="CMake Application.Debug (query)" />
       <item itemvalue="CMake Application.Debug (list)" />
       <item itemvalue="CMake Application.Debug (help)" />
@@ -164,6 +173,7 @@
       <workItem from="1643195880578" duration="2924000" />
       <workItem from="1644244098364" duration="3254000" />
       <workItem from="1644405149025" duration="933000" />
+      <workItem from="1644849870202" duration="2415000" />
     </task>
     <task id="LOCAL-00001" summary="Testing project using CLion IDE">
       <created>1642543240942</created>

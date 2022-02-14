@@ -72,58 +72,31 @@ int VaultManager::fileBackup(const std::filesystem::path &file) {
 
 //Get a file with string- or integer identifier
 void VaultManager::fileRetrieve(const std::string &identifier) {
-	tinyxml2::XMLElement *file = rootNode->FirstChildElement("file");
-	while (file != nullptr) {
-		//Check this file's name against the provided filename
-		if (strcmp(identifier.c_str(), file->FirstChildElement("fileName")->GetText()) == 0)
-			break;
-		file = file->NextSiblingElement();
-	}
-	if (file == nullptr) {
+    if (identifier.length() > 120) //Don't allow very long identifiers
+    { std::cout << "Identifier too long. Try again with shorter search.\n"; }
+    BackFile* file = parseFile(identifier);
+	if (file == nullptr) { //The file could not be found
 		std::cout << "We could not find " << identifier
 				  << " in the vault.\n"
                   << "Use 'query' to search."
 				  << std::endl;
 		return;
-	} else {
-		//Attempt to move the found file to where it was called from
-		std::filesystem::path backupFileName = std::filesystem::current_path() / identifier;
-		if (std::filesystem::exists(backupFileName)) {
-			std::cout << "File with same name already exists.\n"
-					  << "File will be retrieved as '_copy'." << std::endl;
-			int copy = 0;
-			std::filesystem::path incrementedPath;
-			std::string filenameNoExt = backupFileName.filename().string();
-			filenameNoExt.erase(filenameNoExt.length() - backupFileName.extension().string().length());
-			do {
-				if (copy == 0) {
-					incrementedPath = backupFileName;
-					incrementedPath.replace_filename
-							(filenameNoExt + "_copy" + backupFileName.extension().string());
-				} else {
-					incrementedPath = backupFileName;
-					incrementedPath.replace_filename
-							(filenameNoExt + "_" + "copy" + std::to_string(copy)
-							 + backupFileName.extension().string());
-				}
-				copy++;
-			} while (std::filesystem::exists(incrementedPath));
-			backupFileName = incrementedPath;
-		}
-		std::filesystem::copy(
-				configManager->getVaultPath() / file->FirstChildElement("backupName")->GetText(),
-				std::filesystem::current_path() / backupFileName);
 	}
+    std::filesystem::copy
+            (file->getPath(), createUniquePath(std::filesystem::current_path(), file->getPath()));
 }
 void VaultManager::fileRestore(const std::string &identifier, bool replace)
 {
 	BackFile *file = parseFile(identifier);
 	if (file == nullptr)
-		std::cout << "Could not find " << identifier << '.' << std::endl;
-	if (std::filesystem::exists(file->getPath()) && !replace) {
+    {
+        std::cout << "Could not find " << identifier << '.' << std::endl;
+        return;
+    }
+		if (std::filesystem::exists(file->getPath()) && !replace) {
 		std::cout << "Existing file at destination exists." << std::endl;
 		std::filesystem::copy
-			(vaultPath / identifier, createUniquePath(file->getPath().parent_path(), file->getPath()));
+			(file->getPath(), createUniquePath(file->getPath().parent_path(), file->getPath()));
 	}
 }
 
@@ -212,6 +185,7 @@ std::vector<BackFile *> VaultManager::getFiles() {
 	return returnVector;
 }
 
+//Looks for the given file exactly
 BackFile* VaultManager::parseFile(const std::string &identifier) {
 	for (BackFile *file : files)
 	{
@@ -220,6 +194,7 @@ BackFile* VaultManager::parseFile(const std::string &identifier) {
 	}
 	return nullptr;
 }
+//Looks for the given file ID exactly
 BackFile* VaultManager::parseFile(const int identifier) {
 	for (BackFile *file : files)
 	{
